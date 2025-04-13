@@ -3,9 +3,9 @@
 
 from typing import Optional
 
-class Anime:
-    """Classe para armazenar informações do anime"""
+class LatestAnime:
     def __init__(self, title: str = "", episode: Optional[str] = None, url: Optional[str] = None):
+        """Classe para armazenar informações do anime"""
         self.title = title
         self.episode = episode
         self.url = url

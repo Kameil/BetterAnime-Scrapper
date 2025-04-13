@@ -1,4 +1,5 @@
 from betteranime import Betteranime
+from betteranime.types import LatestAnime
 
 Betteranime = Betteranime()
 

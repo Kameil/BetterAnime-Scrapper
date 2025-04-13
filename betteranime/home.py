@@ -5,22 +5,39 @@ Todos os comanndos para a pagina inicial do betteranime.net
 from typing import Optional, List
 import requests
 from bs4 import BeautifulSoup
-from betteranime.types import Anime
+from betteranime.types import LatestAnime
 
 class Home:
-    def __init__(self, url: str):
+    def __init__(self, url: str, session: requests.Session):
         """ Pagina Inicial do Betteranime"""
         self.url = url
-        self.headers = {"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:137.0) Gecko/20100101 Firefox/137.0"}
+        self.session = session
          
 
-    def get_lastest_releases(self) -> Optional[List[Anime]]:
-        """Pegar Lista dos ultimos animes lancados."""
-        response = requests.get(self.url, headers=self.headers)
+    def get_lastest_releases(self) -> Optional[List[LatestAnime]]:
+        """
+        Pegar Lista dos ultimos animes lancados.
+        
+        exemplo:
+        ```python
+        from betteranime import Betteranime
+
+        Betteranime = Betteranime()
+
+        releases = Betteranime.get_lastest_releases()
+
+        for anime in releases:
+            print(f"Title: {anime.title}")
+            print(f"Episode: {anime.episode}")
+            print(f"URL: {anime.url}")
+            print("-" * 20)
+        ```
+        """
+        response = self.session.get(self.url)
         response.raise_for_status()
         
         soup = BeautifulSoup(response.text, 'html.parser')
-        animes: List[Anime] = []
+        animes: List[LatestAnime] = []
 
         articles = soup.find_all("article")
         for article in articles:
@@ -31,7 +48,7 @@ class Home:
                 if title and episode:
                     title = title.text.strip()
                     episode = episode.text.strip().split(" ")[1]
-                    anime = Anime(title, episode)
+                    anime = LatestAnime(title, episode)
                     animes.append(anime)
         return animes
         
