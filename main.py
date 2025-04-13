@@ -2,6 +2,10 @@ from betteranime import Betteranime
 
 Betteranime = Betteranime()
 
-Betteranime.get_lastest_releases()
+releases = Betteranime.get_lastest_releases()
 
-from betteranime import Betteranime
+for anime in releases:
+    print(f"Title: {anime.title}")
+    print(f"Episode: {anime.episode}")
+    print(f"URL: {anime.url}")
+    print("-" * 20)
