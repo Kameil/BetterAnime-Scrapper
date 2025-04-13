@@ -9,13 +9,14 @@ from bs4 import BeautifulSoup
 
 class Anime:
         """ Classe para armazenar informacoes do anime"""
-        def __init__(self, title = "Solo Leveling", episode = "Episodio 1"):
+        def __init__(self, title = "", episode: Optional[str] = None, url: Optional[str] = None):
             self.title: str = title
-            self.episode: str = episode
+            self.episode: Optional[str] = episode
+            self.url: Optional[str] = url
 
 class Home:
     def __init__(self, url: str):
-        """ Pagina Inicial do myanimelist"""
+        """ Pagina Inicial do Betteranime"""
         self.url = url
         self.headers = {"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:137.0) Gecko/20100101 Firefox/137.0"}
          
