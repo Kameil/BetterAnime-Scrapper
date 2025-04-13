@@ -5,14 +5,7 @@ Todos os comanndos para a pagina inicial do betteranime.net
 from typing import Optional, List
 import requests
 from bs4 import BeautifulSoup
-
-
-class Anime:
-        """ Classe para armazenar informacoes do anime"""
-        def __init__(self, title = "", episode: Optional[str] = None, url: Optional[str] = None):
-            self.title: str = title
-            self.episode: Optional[str] = episode
-            self.url: Optional[str] = url
+from betteranime.types import Anime
 
 class Home:
     def __init__(self, url: str):
@@ -38,7 +31,6 @@ class Home:
                 if title and episode:
                     title = title.text.strip()
                     episode = episode.text.strip().split(" ")[1]
-                    print(f"Title: {title}, Episode: {episode}")
                     anime = Anime(title, episode)
                     animes.append(anime)
         return animes
