@@ -1,12 +1,16 @@
 from betteranime import Betteranime
-from betteranime.types import LatestAnime
 
 Betteranime = Betteranime()
 
-releases = Betteranime.get_lastest_releases()
+while True:
 
-for anime in releases:
-    print(f"Title: {anime.title}")
-    print(f"Episode: {anime.episode}")
-    print(f"URL: {anime.url}")
-    print("-" * 20)
+    anime = input("Pesquise um anime:")
+
+    animes = Betteranime.search_by_title(anime)
+
+    for anime in animes:
+        print(anime.name)
+        print(f"Image_url = {anime.image_url}")
+        print(anime.episodes_count)
+        print(anime.url)
+        print("-"*30)
